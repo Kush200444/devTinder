@@ -1,0 +1,22 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "date site for vampires",
+  "keywords": [
+    "nodejs",
+    "backend",
+    "react",
+    "frontend",
+    "express",
+    "tailwind",
+    "css",
+    "mongodb"
+  ],
+  "license": "ISC",
+  "author": "Kush Sehgal",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
