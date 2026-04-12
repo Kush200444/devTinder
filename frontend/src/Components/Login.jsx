@@ -1,8 +1,21 @@
+import axios from 'axios';
 import React from 'react';
 
 const Login = () => {
   const[email, setEmail] = React.useState("");
   const[password, setPassword] = React.useState("");
+  const handleLogin = async () => {
+    try{
+      const response = await axios.post("http://localhost:3100/login",{
+        emailId:email,
+        password:password
+      },{
+        withCredentials:true
+      })
+    }catch(err){
+      console.error(err);
+    }
+  }
   return (
     <>
       <div className="card bg-base-200 w-96 shadow-sm mx-auto mt-10">
@@ -24,7 +37,7 @@ const Login = () => {
        className="input"
         placeholder="Password" />
       </fieldset>
-      <button className="btn btn-primary justify-center items-center">Login</button>
+      <button className="btn btn-primary justify-center items-center" onClick={handleLogin}>Login</button>
     </div>
   </div>
 </div>
