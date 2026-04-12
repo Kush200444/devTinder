@@ -9,3 +9,10 @@
 - created Header and placed it in app.jsx
 
 -----rafce to dummy component----------
+
+
+- Installed react-router
+- Installed react-router-dom
+
+- we very aware about changing the routing of the page, because it will effect your SEO                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
