@@ -10,7 +10,7 @@ const userAuth = async (req,res,next) => {
     expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
   } );
        const user = await User.findById({_id:decoded._id});
-       if(!user){
+       if(!user){ 
           throw new Error("User not found");
        }
        req.user = user;
@@ -19,7 +19,5 @@ const userAuth = async (req,res,next) => {
        res.status(404).send(err.message);
      }
 };
-
-
 
 module.exports = {userAuth,};

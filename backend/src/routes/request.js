@@ -9,7 +9,7 @@ requestRouter.post("/request/send/:status/:toUserId",userAuth, async (req,res) =
 
    try{ 
    const fromUserId = req.user;  
-   const status = req.params.status;
+   const status = req.params.status;    
    const toUserId = req.params.toUserId;
 
    const allowedStatus = ["interested","ignored"];
