@@ -1,1 +1,2 @@
-export default BASE_URL = "http://localhost:5173";
+const BASE_URL = "http://localhost:3100";
+export default BASE_URL;

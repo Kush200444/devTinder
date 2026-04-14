@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React from 'react';
+// Removed unused React import
 import { useNavigate } from 'react-router-dom';
 import BASE_URL from '../utils/constants';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { useState } from "react";
 const Login = () => {
-  const[email, setEmail] = React.useState("viratkohli@gmail.com");
-  const[password, setPassword] = React.useState("Virat@12345");
+const [email, setEmail] = useState("viratkohli@gmail.com");
+  const [password, setPassword] = useState("Virat@12345");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -18,7 +19,7 @@ const Login = () => {
         withCredentials:true
       });
       dispatch(addUser(response.data));
-      return navigate("/");
+         return navigate("/feed");
     }catch(err){
       console.error(err);
     }
@@ -38,11 +39,11 @@ const Login = () => {
        placeholder="Email" />
     
       <legend className="password">Password</legend>
-      <input type="Password"
+  <input type="password"
        value={password}
        onChange={(e)=>setPassword(e.target.value)}
        className="input"
-        placeholder="Password" />
+        placeholder="Password" /> 
       </fieldset>
       <button className="btn btn-primary justify-center items-center" onClick={handleLogin}>Login</button>
     </div>
