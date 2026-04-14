@@ -20,10 +20,11 @@ const Body = () => {
       console.error(err);
     }
   }
-  useEffect(()=> {
-    if(!userData){
-    fetchUser()
-}},[]);
+useEffect(() => {
+    if(!userData?.user) {
+      fetchUser();
+    }
+  }, []);
   return(
     <>
     <Header/>

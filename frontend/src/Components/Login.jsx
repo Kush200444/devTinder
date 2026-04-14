@@ -8,6 +8,7 @@ import { useState } from "react";
 const Login = () => {
 const [email, setEmail] = useState("viratkohli@gmail.com");
   const [password, setPassword] = useState("Virat@12345");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -21,6 +22,7 @@ const [email, setEmail] = useState("viratkohli@gmail.com");
       dispatch(addUser(response.data));
          return navigate("/feed");
     }catch(err){
+      setError(err.response.data || "Something went wrong");
       console.error(err);
     }
   }
@@ -46,6 +48,9 @@ const [email, setEmail] = useState("viratkohli@gmail.com");
         placeholder="Password" /> 
       </fieldset>
       <button className="btn btn-primary justify-center items-center" onClick={handleLogin}>Login</button>
+      <div className="text-red-500">
+        <p>{error}</p>
+      </div>
     </div>
   </div>
 </div>
