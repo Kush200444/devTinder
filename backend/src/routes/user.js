@@ -3,7 +3,7 @@ const userRouter = express.Router();
 const {userAuth} = require("../middlewares/auth");
 const ConnectionRequest = require("../models/connectionRequest");
 const { Connection } = require("mongoose");
-const USER_SAFE_DATA = "firstName lastName gender age about photoUrl";
+const USER_SAFE_DATA = "firstName lastName gender age about photoUrl location skills";
 const User = require("../models/user")
 userRouter.get("/user/requests/recieved",userAuth, async (req,res)=>{
    try{
@@ -70,7 +70,7 @@ userRouter.get("/user/feed", userAuth, async (req,res) =>{
         {_id:{$nin: Array.from(hideUsersFromFeed)}},
         {_id:{$ne:loggedIn._id}}
       ]
-    }).select(USER_SAFE_DATA)``
+    }).select(USER_SAFE_DATA)
       .skip(skip)
       .limit(limit);
 

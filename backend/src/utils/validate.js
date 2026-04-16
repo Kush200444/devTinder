@@ -17,6 +17,7 @@ const validateUserEditData = async function(req){
       const ALLOWED_UPDATES = ["photoUrl",
                                "age",
                                "gender",
+                               "location",
                                "skills",
                                "about"
                                ];
