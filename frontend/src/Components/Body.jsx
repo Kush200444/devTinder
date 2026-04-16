@@ -31,7 +31,7 @@ useEffect(() => {
       <main className="app-main">
         <Outlet/>
       </main>
-      {/* <Footer/> */}
+       <Footer/> 
     </div>
   ) 
 }
