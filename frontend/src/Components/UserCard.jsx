@@ -3,6 +3,7 @@ import axios from "axios";
 import BASE_URL from "../utils/constants";
 
 const UserCard = ({ user, onActionComplete, showActions = true, className = "" }) => {
+  const {firstName, lastName, photoUrl, age, gender,location, about, skills} = user;
   const [isAnimating, setIsAnimating] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState(null);
 
