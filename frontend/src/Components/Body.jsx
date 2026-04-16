@@ -26,11 +26,13 @@ useEffect(() => {
     }
   }, []);
   return(
-    <>
-    <Header/>
-    <Outlet/>
-    <Footer/>
-    </>
+    <div className="app-shell min-h-screen">
+      <Header/>
+      <main className="app-main">
+        <Outlet/>
+      </main>
+      {/* <Footer/> */}
+    </div>
   ) 
 }
 
