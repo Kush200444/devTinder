@@ -12,10 +12,13 @@ body {
 
 .app-shell {
   background: radial-gradient(circle at top left, #1b2740 0%, #111827 40%, #090e17 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-main {
-  min-height: calc(100vh - 74px);
+  flex: 1;
 }
 
 .app-navbar {
@@ -207,4 +210,204 @@ body {
 .user-card-skill {
   border-color: rgba(137, 155, 193, 0.55);
   color: #d8e2f3;
+}
+
+.app-footer {
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+  background: linear-gradient(180deg, rgba(7, 11, 19, 0.97), rgba(5, 8, 14, 0.98));
+  border-top: 1px solid rgba(121, 138, 172, 0.22);
+}
+
+.app-footer__glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  width: min(680px, 90vw);
+  height: 240px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(87, 125, 255, 0.22) 0%, rgba(87, 125, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.app-footer__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.3rem 1.1rem 1.8rem;
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, minmax(130px, 1fr));
+  gap: 1.6rem;
+}
+
+.app-footer__brand {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: #f0f4ff;
+  text-decoration: none;
+}
+
+.app-footer__tagline {
+  margin-top: 0.75rem;
+  max-width: 40ch;
+  color: #aebddb;
+  line-height: 1.55;
+}
+
+.app-footer__socials {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.app-footer__socials a {
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #d6e2ff;
+  border: 1px solid rgba(121, 138, 172, 0.35);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  background: rgba(24, 33, 52, 0.4);
+  transition: all 0.2s ease;
+}
+
+.app-footer__socials a:hover {
+  border-color: rgba(133, 161, 234, 0.65);
+  transform: translateY(-1px);
+}
+
+.app-footer__links h6 {
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8ea4ce;
+}
+
+.app-footer__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-footer__links a {
+  text-decoration: none;
+  color: #d6e2ff;
+  margin-bottom: 0.58rem;
+  font-size: 0.93rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.app-footer__links a:hover {
+  color: #f0f5ff;
+  transform: translateX(1px);
+}
+
+.app-footer__bottom {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(121, 138, 172, 0.2);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.95rem 1.1rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  color: #93a8d0;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 940px) {
+  .app-footer__content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-footer__content {
+    grid-template-columns: 1fr;
+    padding-top: 2rem;
+  }
+
+  .app-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Requests Page Styles */
+.request-card-container {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.connection-card-shell,
+.request-card-shell {
+  background: linear-gradient(180deg, rgba(18, 26, 40, 0.96), rgba(10, 15, 26, 0.98));
+  border: 1px solid rgba(121, 138, 172, 0.28);
+  backdrop-filter: blur(8px);
+}
+
+.connection-card-title,
+.request-card-title {
+  color: #f2f6ff;
+}
+
+.connection-card-about,
+.request-card-about {
+  color: #d6e1f3;
+}
+
+.connection-meta-badge {
+  background: rgba(24, 35, 56, 0.82);
+  border: 1px solid rgba(126, 151, 196, 0.45);
+  color: #d7e4ff;
+}
+
+.connection-skill-badge {
+  background: rgba(26, 53, 79, 0.85);
+  border: 1px solid rgba(94, 165, 227, 0.5);
+  color: #ccedff;
+}
+
+.connection-more-badge {
+  background: rgba(34, 44, 62, 0.78);
+  color: #d3ddf0;
+  border: 1px solid rgba(121, 138, 172, 0.35);
+}
+
+.request-btn-reject {
+  background: rgba(152, 42, 70, 0.22);
+  color: #ffcad5;
+  border: 1px solid rgba(226, 98, 128, 0.55);
+}
+
+.request-btn-reject:hover {
+  background: rgba(184, 50, 82, 0.35);
+}
+
+.request-btn-accept {
+  background: linear-gradient(90deg, #4c6fff 0%, #27b8b6 100%);
+  border: none;
+  color: #fff;
+}
+
+.request-btn-accept:hover {
+  filter: brightness(1.08);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
