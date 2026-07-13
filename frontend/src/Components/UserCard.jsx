@@ -1,66 +1,27 @@
 import { useState } from "react";
 import axios from "axios";
 import BASE_URL from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from "../utils/feedSlice";
 
-const UserCard = ({ user, onActionComplete, showActions = true, className = "" }) => {
-  const {firstName, lastName, photoUrl, age, gender,location, about, skills} = user;
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [swipeDirection, setSwipeDirection] = useState(null);
-
-  if (!user) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <p className="text-xl text-gray-500">No more users to show!</p>
-      </div>
-    );
+  const UserCard = ({user,className=""}) => {
+  const {_id,firstName,lastName,photoUrl,age,gender,about,skills,location} = user || {};
+  const dispatch = useDispatch();
+  const handleSendRequest = async (status,userId) => {
+     try{
+       const res = await axios.post(BASE_URL + "/request/send/" + status + "/" + userId,
+        {},{
+          withCredentials: true
+        },
+        dispatch(removeUserFromFeed(userId))
+       )
+     }catch(err){
+      console.error("Error sending request:", err);
+     }
   }
-
-  const handleAction = async (action) => {
-    if (!showActions || isAnimating) {
-      return;
-    }
-
-    const directionMap = {
-      ignored: "left",
-      interested: "right",
-      skip: "up",
-    };
-    setSwipeDirection(directionMap[action] || "up");
-    setIsAnimating(true);
-
-    try {
-      if (action === "ignored" || action === "interested") {
-        await axios.post(
-          `${BASE_URL}/request/send/${action}/${user._id}`,
-          {},
-          { withCredentials: true }
-        );
-      }
-      setTimeout(() => {
-        setIsAnimating(false);
-        setSwipeDirection(null);
-        onActionComplete?.(action);
-      }, 280);
-    } catch (err) {
-      setIsAnimating(false);
-      setSwipeDirection(null);
-      console.error(err);
-    }
-  };
-
   return (
     <div className={`flex justify-center items-center w-full p-2 ${className}`}>
-      <div
-        className={`relative w-full max-w-md h-[600px] transition-all duration-300 ${
-          isAnimating
-            ? swipeDirection === "left"
-              ? "translate-x-96 rotate-12 opacity-0"
-              : swipeDirection === "right"
-              ? "-translate-x-96 -rotate-12 opacity-0"
-              : "translate-y-96 opacity-0"
-            : "translate-x-0 translate-y-0 opacity-100"
-        }`}
-      >
+      <div className="relative w-full max-w-sm">
         {/* Card */}
         <div className="card user-card-shell shadow-2xl overflow-hidden h-full">
           {/* Image Section */}
@@ -114,31 +75,23 @@ const UserCard = ({ user, onActionComplete, showActions = true, className = "" }
         </div>
       </div>
 
-      {showActions ? (
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-6 z-50">
           <button
-            onClick={() => handleAction("ignored")}
+            onClick={() => handleSendRequest("ignored",_id)}
             className="btn btn-circle btn-lg btn-error text-white hover:scale-110 transition-transform shadow-lg"
             title="Reject"
           >
             ✕
           </button>
           <button
-            onClick={() => handleAction("skip")}
-            className="btn btn-circle btn-lg btn-warning text-white hover:scale-110 transition-transform shadow-lg"
-            title="Ignore"
-          >
-            —
-          </button>
-          <button
-            onClick={() => handleAction("interested")}
+            onClick={() => handleSendRequest("interested",_id)}
             className="btn btn-circle btn-lg btn-success text-white hover:scale-110 transition-transform shadow-lg"
             title="Accept"
           >
             ❤
           </button>
         </div>
-      ) : null}
+    
     </div>
   );
 };

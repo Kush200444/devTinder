@@ -11,14 +11,13 @@ app.use(cookieParser());
 
 
 authRouter.post("/signup", async (req,res) => {
- // Creating new instance of the 'User' model 
-const data = req.body;
-try{
-validateSignUpData(req);
-const {firstName,lastName,emailId,password} = req.body;
-const passwordHash = await bcrypt.hash(password,10);
-console.log(passwordHash);
-const user =  new User({
+ const data = req.body;
+ try{
+ validateSignUpData(req);  
+ const {firstName,lastName,emailId,password} = req.body;
+ const passwordHash = await bcrypt.hash(password,10);
+ console.log(passwordHash);
+ const user =  new User({
   firstName,
   lastName,
   emailId,
@@ -55,7 +54,7 @@ authRouter.post("/login", async function(req,res){
   }; 
   }catch(err){
     res.status(401).send(err.message);
-  }
+  } 
 });
 
 authRouter.post("/logout", async (req,res) => {

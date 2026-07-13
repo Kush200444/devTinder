@@ -6,9 +6,12 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useState } from "react";
 const Login = () => {
-const [email, setEmail] = useState("viratkohli@gmail.com");
-  const [password, setPassword] = useState("Virat@12345");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -26,15 +29,48 @@ const [email, setEmail] = useState("viratkohli@gmail.com");
       console.error(err);
     }
   }
+  const handleSignup = async () => {
+     try{
+          const res = await axios.post(BASE_URL + "/signup",{
+            firstName,
+            lastName,
+            email,
+            password
+          },{
+            withCredentials:true
+          });
+     }catch(err){
+        console.error(err);
+     }
+  }
   return (
+
+
     <div className="w-full min-h-[calc(100vh-74px)] flex items-center justify-center px-4">
       <div className="card login-card w-full max-w-md shadow-xl">
         <div className="card-body">
-          <h2 className="card-title justify-center items-center login-title">Login</h2>
-          <p className="text-center login-subtitle">Welcome back to DevTinder</p>
+          <h2 className="card-title justify-center items-center login-title">{isLogin ? "Login" : "Sign Up"}</h2>
+          <p className="text-center login-subtitle">{isLogin ? "Welcome back to DevTinder" : "Create your account"}</p>
 
           <div className="card-actions my-4 flex-col">
-            <fieldset className="fieldset w-full">
+           <fieldset className="fieldset w-full">
+
+             {!isLogin && <><legend className="fieldset-legend login-label">First Name</legend>
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e)=>setFirstName(e.target.value)}
+                className="input login-input"
+                placeholder="First Name"
+              />
+              <legend className="fieldset-legend login-label">Last Name</legend>
+              <input
+                type="text"
+                value={lastName}
+                onChange={(e)=>setLastName(e.target.value)}
+                className="input login-input"
+                placeholder="Last Name"
+              /> </>}
               <legend className="fieldset-legend login-label">Email</legend>
               <input
                 type="text"
@@ -53,12 +89,21 @@ const [email, setEmail] = useState("viratkohli@gmail.com");
                 placeholder="Password"
               />
             </fieldset>
-            <button className="btn login-btn justify-center items-center w-full mt-4" onClick={handleLogin}>Login</button>
+            <button className="btn login-btn justify-center items-center w-full mt-4" onClick={isLogin ? handleLogin : handleSignup}>
+              {isLogin ? "Login" : "Sign Up"}
+            </button>
             {error ? (
               <div className="login-error text-center w-full">
                 <p>{error}</p>
               </div>
             ) : null}
+            {isLogin ? (
+              <p className=' text-blue-200 ' onClick={(value) => setIsLogin(!value)}>
+                New to DevTinder? <span className='cursor-pointer underline'>click here</span>
+              </p>
+            ) : (<p className=' text-blue-200 ' onClick={() => setIsLogin(true)}>
+                Already have an account? <span className='cursor-pointer underline'>click here</span>
+              </p>)}
           </div>
         </div>
       </div>
