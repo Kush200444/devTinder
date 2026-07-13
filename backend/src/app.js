@@ -4,8 +4,9 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
 const cors = require("cors");
+const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin: allowedOrigins,
     credentials:true
 }));
 app.use(express.json());

@@ -9,7 +9,7 @@ const userAuth = async (req,res,next) => {
     const decoded = await jwt.verify(token,"Kush@12345",{
     expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
   } );
-       const user = await User.findById({_id:decoded._id});
+       const user = await User.findById(decoded._id);
        if(!user){ 
           throw new Error("User not found");
        }
