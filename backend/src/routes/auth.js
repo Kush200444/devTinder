@@ -23,7 +23,7 @@ authRouter.post("/signup", async (req,res) => {
   emailId,
   password:passwordHash
 });
-if(data?.skills.length>10){
+if (data.skills && data.skills.length > 10) {
     throw new Error("Skills cannot be more than 10")
  };
  await user.save();         
