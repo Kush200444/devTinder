@@ -31,10 +31,10 @@ const Login = () => {
   }
   const handleSignup = async () => {
      try{
-          const res = await axios.post(BASE_URL + "/signup",{
+          await axios.post(BASE_URL + "/signup",{
             firstName,
             lastName,
-            email,
+            emailId:email,
             password
           },{
             withCredentials:true
