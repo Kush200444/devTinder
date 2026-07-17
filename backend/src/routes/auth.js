@@ -11,45 +11,6 @@ app.use(cookieParser());
 
 
 authRouter.post("/signup", async (req, res) => {
-  console.log("===== SIGNUP START =====");
-
-  try {
-    console.log("Body:", req.body);
-
-    validateSignUpData(req);
-    console.log("Validation passed");
-
-    const { firstName, lastName, emailId, password } = req.body;
-
-    const passwordHash = await bcrypt.hash(password, 10);
-    console.log("Password hashed");
-
-    const user = new User({
-      firstName,
-      lastName,
-      emailId,
-      password: passwordHash,
-    });
-
-    console.log("User object created");
-
-    if (data.skills && data.skills.length > 10) {
-      throw new Error("Skills cannot be more than 10");
-    }
-
-    console.log("Before save");
-
-    await user.save();
-
-    console.log("After save");
-
-    res.send("Signup successful");
-  } catch (err) {
-    console.error("ERROR:", err);
-    console.error(err.stack);
-    res.status(500).send(err.message);
-  }
-});authRouter.post("/signup", async (req, res) => {
   try {
     validateSignUpData(req);
 
