@@ -12,12 +12,15 @@ app.use(cookieParser());
 
 authRouter.post("/signup", async (req, res) => {
   try {
+    // Validate request data
     validateSignUpData(req);
 
     const { firstName, lastName, emailId, password } = req.body;
 
+    // Encrypt password
     const passwordHash = await bcrypt.hash(password, 10);
 
+    // Create new user
     const user = new User({
       firstName,
       lastName,
@@ -25,11 +28,11 @@ authRouter.post("/signup", async (req, res) => {
       password: passwordHash,
     });
 
+    // Save user to database
     await user.save();
 
     res.status(201).send("User added successfully");
   } catch (err) {
-    console.error("SIGNUP ERROR:", err);
     res.status(400).send(err.message);
   }
 });
