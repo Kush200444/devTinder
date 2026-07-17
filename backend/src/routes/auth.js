@@ -49,6 +49,28 @@ authRouter.post("/signup", async (req, res) => {
     console.error(err.stack);
     res.status(500).send(err.message);
   }
+});authRouter.post("/signup", async (req, res) => {
+  try {
+    validateSignUpData(req);
+
+    const { firstName, lastName, emailId, password } = req.body;
+
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: passwordHash,
+    });
+
+    await user.save();
+
+    res.status(201).send("User added successfully");
+  } catch (err) {
+    console.error("SIGNUP ERROR:", err);
+    res.status(400).send(err.message);
+  }
 });
 
 authRouter.post("/login", async function(req,res){
